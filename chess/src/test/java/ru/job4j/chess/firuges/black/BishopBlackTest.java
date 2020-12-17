@@ -1,14 +1,15 @@
 package ru.job4j.chess.firuges.black;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import java.util.Arrays;
 
-public class BishopBlackTest extends TestCase {
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.*;
+
+public class BishopBlackTest {
 
     @Test
     public void testPosition() {
@@ -21,5 +22,36 @@ public class BishopBlackTest extends TestCase {
         BishopBlack bishopBlack = new BishopBlack(Cell.A8);
         Figure bishopBlack1 = bishopBlack.copy(Cell.A1);
         assertThat(bishopBlack1.position(), is(Cell.A1));
+    }
+
+    @Test
+    public void testMain() {
+        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+        Cell[] way = bishopBlack.way(Cell.G5);
+        Cell[] test = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
+        assertTrue(Arrays.equals(test, way));
+    }
+
+    @Test
+    public void testIsDiagonal() {
+        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+        assertFalse(bishopBlack.isDiagonal(bishopBlack.position(), Cell.E4));
+    }
+
+    @Test (expected = IllegalStateException.class)
+    public void isNotDiagonalFirstWay() {
+        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+        bishopBlack.way(Cell.E5);
+    }
+
+    @Test
+    public void isNotDiagonalSecondWay() {
+        try {
+            BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+            bishopBlack.way(Cell.E5);
+            fail("Expected IllegalStateException");
+        } catch (IllegalStateException exception) {
+            assertThat(exception.getMessage(), is(String.format("Could not way by diagonal from %s to %s", Cell.C1, Cell.E5)));
+        }
     }
 }
