@@ -25,7 +25,7 @@ public class BishopBlackTest {
     }
 
     @Test
-    public void testMain() {
+    public void testWay() {
         BishopBlack bishopBlack = new BishopBlack(Cell.C1);
         Cell[] way = bishopBlack.way(Cell.G5);
         Cell[] test = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
