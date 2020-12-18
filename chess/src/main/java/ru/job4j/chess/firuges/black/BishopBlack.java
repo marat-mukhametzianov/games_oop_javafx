@@ -34,7 +34,6 @@ public class BishopBlack implements Figure {
             currentX += deltaX;
             currentY += deltaY;
             result[i] = Cell.findBy(currentX, currentY);
-
         }
         return result;
     }
