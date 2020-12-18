@@ -43,15 +43,4 @@ public class BishopBlackTest {
         BishopBlack bishopBlack = new BishopBlack(Cell.C1);
         bishopBlack.way(Cell.E5);
     }
-
-    @Test
-    public void isNotDiagonalSecondWay() {
-        try {
-            BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-            bishopBlack.way(Cell.E5);
-            fail("Expected IllegalStateException");
-        } catch (IllegalStateException exception) {
-            assertThat(exception.getMessage(), is(String.format("Could not way by diagonal from %s to %s", Cell.C1, Cell.E5)));
-        }
-    }
 }
